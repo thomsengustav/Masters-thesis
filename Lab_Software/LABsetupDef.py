@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr  9 09:11:44 2024
-
-@author: lauri
-"""
 import time
 import numpy as np
 #import msvcrt
@@ -12,7 +6,8 @@ import base64
 import struct
 import datetime as dt
 
-'''
+''' 
+# Code to communicate to arduino
 def send_pos(ard)
     x = str(v0)
     arduino.write(bytes(x,  'utf-8'))
@@ -25,11 +20,13 @@ def send_pos(ard)
         if data:  # If line is not empty
             c=False
 '''
+# Code to communicate to THz spectrometer
 def send(sock,command1):
     command1 = command1 + '\n'
     res = bytes(command1, 'utf-8')
     sock.sendall(res)
 
+# Vector creation for get_freq_data function
 def create_vector(Number):
     n = Number/1000
     entries = np.floor(n)+1
@@ -40,9 +37,8 @@ def create_vector(Number):
         else:
             v[i]=Number-i*1000
     return v
-    
-    
 
+# Command to retrieve data from THz spectrometer in raw format
 def extract_bytes_from_signal(sock):
     received_data = b''  # Initialize an empty bytes object to store recieved data
     start_index = None  # Initialize start index as None
@@ -59,6 +55,7 @@ def extract_bytes_from_signal(sock):
     extracted_bytes = received_data[start_index+1:end_index]
     return extracted_bytes
 
+# Total code for extracting data from THz spectrometer and decoding it
 def get_freq_data(Npoints,sock):
     data_index = [1,6,2] # 1=setFQ,6=actFQ,2=Photocurrent see commandreference p.20
     point_index = create_vector(Npoints)
@@ -85,7 +82,7 @@ def get_freq_data(Npoints,sock):
         dataMat[counter,0:len(data[:])] = data
         counter += 1
     return dataMat
-
+# Bad time tracking for lab software
 def time_table(omgangtid,timetable,counter,aPoints):
     timetable[counter+1] = int(time.time())
     omgangtid[counter] = int(timetable[counter+1]-timetable[counter])
@@ -109,6 +106,7 @@ def time_table(omgangtid,timetable,counter,aPoints):
         print('Time remaining: ',ht,' hours, ', mt, ' minutes and ', tt, ' seconds.')
     return omgangtid,timetable
 
+# File naming
 def tidsfil(navn):
     date = dt.datetime.now()
     date = date.strftime('%Y%m%dh%H')
