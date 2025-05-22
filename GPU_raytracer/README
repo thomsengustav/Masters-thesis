@@ -3,4 +3,7 @@ optixTriangle.cpp : modified optix example to setup BVH, pipeline, shader bindin
 optixTriangle.cu : Ray generation / hit / miss programs.
 im.h : import of triangle mesh.
 
+Billede_danner_GPU_bistatic.py : BPA function.
+optixBPA_clutter4.py: BPA for optix simulation data.
+
 
