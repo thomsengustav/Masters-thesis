@@ -1,1 +1,6 @@
+This folder contains all the python code written related to the CPU ray-tracer including:
+mesh optimization
+BVH construction and traversal
+Polarization ray-tracing
+
 
