@@ -1,2 +1,6 @@
 Scripts to radar ray tracing simulations using Nvidia Optix 8.0.0.
+optixTriangle.cpp : modified optix example to setup BVH, pipeline, shader binding table and radar parameters.
+optixTriangle.cu : Ray generation / hit / miss programs.
+im.h : import of triangle mesh.
+
 
